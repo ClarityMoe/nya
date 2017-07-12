@@ -22,8 +22,10 @@
   "homepage": "https://github.com/awau/org.awau.ide#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "monaco-editor": "^0.9.0",
+    "serve-favicon": "^2.4.3",
     "vue": "^2.3.4"
   },
   "devDependencies": {
