@@ -1,3 +1,5 @@
+<script src="https://unpkg.com/vue"></script>
+
 <template>
   <div class="index-body">
     <div id="index">
