@@ -4,7 +4,7 @@
  *  @author Capuccino
  */
 
- const router = require(express).Router();
+ const router = require('express').Router();
 
  router.get('/', (res, next) => {
      res.render('dashboard', {
