@@ -1,17 +1,18 @@
-<script src="https://unpkg.com/vue"></script>
-
 <template>
-  <div class="index-body">
+  <div id="index-body">
     <div id="index">
-  
+      {{ message }}
     </div>
   </div>
 </template>
 
 <script>
-  new Vue({
-    el: 'index',
-    input: 'nya.'
-  })
+export default {
+  data() {
+    return {
+      message: "nya",
+    }
+  }
+}
 </script>
 
