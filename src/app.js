@@ -7,7 +7,8 @@
 // override to native promise
 global.Promise = require('bluebird');
 
-const favicon = require("serve-favicon");
+const vue = require('express-vue');
+const favicon = require('serve-favicon');
 const express = require('express');
 const http = require('http');
 const path = require('path');
@@ -62,9 +63,14 @@ if (cluster.isMaster) {
         }
     });
 
+    app.set('vue', {
+        componentsDir: path.join(__dirname, 'components'),
+        defaultLayout: 'layout'
+    });
     app.set('port', port);
-    app.set('view engine', 'pug');
     app.set('views', path.join(__dirname, 'views'));
+    app.engine('vue', vue);
+    app.set('view engine', 'vue')
 
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(bodyParser.json());

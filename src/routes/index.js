@@ -4,12 +4,12 @@
  *  @author Capuccino
  */
 
- const router = require('express').Router();
+const router = require('express').Router();
 
- router.get('/', (res, next) => {
-     res.render('dashboard', {
-         title: 'App | Dashboard'
-     });
- });
+router.get('/', (req, res) => {
+    res.render('dashboard.vue', {
+        title: 'App | Dashboard'
+    });
+});
 
- module.exports = router;
+module.exports = router;

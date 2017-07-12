@@ -1,15 +1,15 @@
 <template>
-<div class="index-body">
-    <div id ="index">
-
+  <div class="index-body">
+    <div id="index">
+  
     </div>
-</div>  
+  </div>
 </template>
 
 <script>
-new Vue ({
-  el :'index',
-  input: 'nya.'
-})
+  new Vue({
+    el: 'index',
+    input: 'nya.'
+  })
 </script>
 
