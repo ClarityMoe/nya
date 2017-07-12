@@ -7,7 +7,7 @@
 // override to native promise
 global.Promise = require('bluebird');
 
-//const favicon = require("serve-favicon");
+const favicon = require("serve-favicon");
 const express = require('express');
 const http = require('http');
 const path = require('path');
@@ -68,7 +68,7 @@ if (cluster.isMaster) {
 
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(bodyParser.json());
-    //app.use(favicon(path.join(__dirname, 'public', 'img', 'favicon.png'))); 
+    app.use(favicon(path.join(__dirname, 'public', 'img', 'favicon.png'))); 
 
     /* routes */
 
