@@ -8,7 +8,7 @@ const router = require('express').Router();
 
 router.get('/', (req, res) => {
     res.render('dashboard', {
-        title: "App | Dashboard"
+        title: 'App | Dashboard'
     });
 });
 
