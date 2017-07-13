@@ -7,12 +7,8 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.render('dashboard.vue', {
-        vue: {
-            head: {
-                title: 'App | Dashboard'
-            }
-        }
+    res.render('dashboard', {
+        title: "App | Dashboard"
     });
 });
 
