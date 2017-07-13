@@ -7,6 +7,7 @@
 require('reflect-metadata');
 const path = require('path');
 const express = require('express');
+const router = express.Router();
 const { Container } = require('inversify');
 
 const { BackendApplication, backendApplicationModule, loggerBackendModule } = require('theia-core/lib/application/node');
@@ -37,3 +38,5 @@ Promise.resolve()
     .then(() => Promise.resolve(require('theia-core/lib/python/node/python-backend-module')).then(load))
     .then(() => Promise.resolve(require('theia-core/lib/cpp/node/cpp-backend-module')).then(load))
     .then(start);
+
+module.exports = router();
