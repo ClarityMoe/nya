@@ -6,8 +6,8 @@
 
  const router = require('express').Router();
 
- router.get('/editor', (req, res, next) => {
+ router.get('/ide/editor', (req, res, next) => {
      res.render('editor', {
-         title: "App | Editor"
+         title: 'App | Editor'
      });
  });
