@@ -39,4 +39,4 @@ Promise.resolve()
     .then(() => Promise.resolve(require('theia-core/lib/cpp/node/cpp-backend-module')).then(load))
     .then(start);
 
-module.exports = router();
+module.exports = router;
