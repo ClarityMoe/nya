@@ -1,3 +1,0 @@
-[submodule "src/routes/editor"]
-	path = src/routes/editor
-	url = https://github.com/theia-ide/theia
