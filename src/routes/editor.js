@@ -1,13 +1,14 @@
 /**
- * @file nya
+ * @file editor.js
  * @description Man it's a hot one
  */
 
  const router = require('express').Router();
 
- router.get('/editor', (req, res, next) => {
+ router.get('/editor', (req, res) => {
      res.render('editor', {
-         title: 'Nya | Editor'
+         title: 'Nya | Editor',
+         layout: 'layout-editor'
      });
  });
 
