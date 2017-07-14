@@ -1,14 +1,14 @@
 {
-  "name": "neko",
-  "version": "0.0.0",
+  "name": "awau-ide",
+  "version": "0.0.1-awau",
   "description": "a modular IDE that can function both as a cloud and desktop IDE",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/awau/org.awau.ide.git"
+    "url": "git+https://github.com/ClaraIO/org.awau.ide.git"
   },
   "keywords": [
     "ide",
@@ -17,18 +17,16 @@
   "author": "sr229 noud02",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/awau/org.awau.ide/issues"
+    "url": "https://github.com/ClaraIO/org.awau.ide/issues"
   },
-  "homepage": "https://github.com/awau/org.awau.ide#readme",
+  "homepage": "https://github.com/ClaraIO/org.awau.ide#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "hbs": "^4.0.1",
-    "inversify": "^4.2.0",
     "monaco-editor": "^0.9.0",
-    "serve-favicon": "^2.4.3",
-    "theia-core": "0.0.1-alpha.2"
+    "serve-favicon": "^2.4.3"
   },
   "devDependencies": {
     "tslint": "^5.5.0",
