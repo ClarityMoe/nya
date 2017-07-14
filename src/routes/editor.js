@@ -6,7 +6,7 @@
  const router = require('express').Router();
 
  router.get('/editor', (req, res, next) => {
-     res.render('/', {
+     res.render('editor', {
          title: 'Nya | Editor'
      });
  });
