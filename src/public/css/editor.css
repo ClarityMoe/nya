@@ -4,6 +4,10 @@ body {
     height:100%;
 }
 
+* {
+    box-sizing: border-box
+}
+
 /* FIXME when https://github.com/Microsoft/monaco-editor/issues/113#issuecomment-240406949 is fixed */
 
 .monaco-editor .inputarea {

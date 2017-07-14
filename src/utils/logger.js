@@ -33,7 +33,7 @@ class Logger extends EventEmitter {
             const ip = clk.blue.bold(`(${req.ip})`);
             const status = this.getStatusColor(res.statusCode);
             const method = clk.bold(req.method);
-            const path = clk.magenta.bold(req.path);
+            const path = clk.magenta.bold(req.originalUrl || req.url);
             console.log(proc, date, ip, status, method, path);
         };
         onFinished(res, log);
