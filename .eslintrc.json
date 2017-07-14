@@ -1,6 +1,6 @@
 {
     "env": {
-        "browser": false,
+        "browser": true,
         "es6": true,
         "node": true
     },
@@ -31,10 +31,12 @@
         "semi": [
             "warn",
             "always"
-        ]
+        ],
+        "no-console": "off"
     },
     "globals": {
         "angular": true,
-        "monaco": true
+        "monaco": true,
+        "io": true
     }
 }
