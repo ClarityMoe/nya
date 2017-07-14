@@ -7,3 +7,11 @@ body {
 * {
     box-sizing: border-box;
 }
+
+.editor-buttons .md-button span {
+    font-size: 12px
+}
+
+.editor-nav {
+    min-height: 36px;
+}

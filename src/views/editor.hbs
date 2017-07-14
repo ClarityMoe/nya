@@ -1,3 +1,22 @@
 {{#extend "body"}}
-<iframe id="monaco-frame" src="/editor/iframe"></iframe>
+<div layout="column" layout-align="start stretch">
+    <md-toolbar class="editor-nav md-menu-toolbar">
+            <div layout="row">
+                <md-menu-bar>
+                    <md-menu class="editor-buttons">
+                        <md-button>
+                            <span>File</span>
+                        </md-button>
+                        <md-button>
+                            <span>Edit</span>
+                        </md-button>
+                        <md-button>
+                            <span>View</span>
+                        </md-button>
+                    </md-menu>
+                </md-menu-bar>
+            </div>
+        </md-toolbar>
+    <iframe id="monaco-frame" src="/editor/iframe"></iframe>
+</div>
 {{/extend}}
