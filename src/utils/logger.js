@@ -11,10 +11,11 @@ const moment = require('moment');
 const onFinished = require('on-finished');
 
 class Logger extends EventEmitter {
-    constructor(opt) {
+    constructor(opt, worker) {
         super();
         opt = opt || {};
         this.debug = opt.debug || false;
+        this.worker = worker || null;
     }
 
     getStatusColor(s) {
@@ -27,12 +28,13 @@ class Logger extends EventEmitter {
 
     request(req, res, next) {
         const log = () => {
+            const proc = clk.yellow(this && this.worker &&  `WORKER ${this.worker.id}` || 'MAIN');
             const date = clk.cyan.bold(`[${moment().format('L')} @ ${moment().format('HH:MM:SS')}]`);
             const ip = clk.blue.bold(`(${req.ip})`);
             const status = this.getStatusColor(res.statusCode);
             const method = clk.bold(req.method);
             const path = clk.magenta.bold(req.path);
-            console.log(date, ip, status, method, path);
+            console.log(proc, date, ip, status, method, path);
         };
         onFinished(res, log);
         next();
@@ -40,28 +42,28 @@ class Logger extends EventEmitter {
 
     info() {
         const time = clk.cyan.bold(`[${moment().format('L')} @ ${moment().format('HH:MM:SS')}]`);
-        return console.info(time, clk.bgMagenta(' INFO '), Array.from(arguments).join(' '));
+        return console.info(clk.yellow(this && this.worker &&  `WORKER ${this.worker.id}` || 'MAIN'), time, clk.bgMagenta(' INFO '), Array.from(arguments).join(' '));
     }
 
     warn() {
         const time = clk.cyan.bold(`[${moment().format('L')} @ ${moment().format('HH:MM:SS')}]`);
-        return console.warn(time, clk.black.bgYellow(' WARN '), Array.from(arguments).join(' '));
+        return console.warn(clk.yellow(this && this.worker &&  `WORKER ${this.worker.id}` || 'MAIN'), time, clk.black.bgYellow(' WARN '), Array.from(arguments).join(' '));
     }
 
     error() {
         const time = clk.cyan.bold(`[${moment().format('L')} @ ${moment().format('HH:MM:SS')}]`);
-        return console.error(time, clk.bgRed(' ERROR '), Array.from(arguments).join(' '));
+        return console.error(clk.yellow(this && this.worker &&  `WORKER ${this.worker.id}` || 'MAIN'), time, clk.bgRed(' ERROR '), Array.from(arguments).join(' '));
     }
 
     log() {
         const time = clk.cyan.bold(`[${moment().format('L')} @ ${moment().format('HH:MM:SS')}]`);
-        return console.log(time, Array.from(arguments).join(' '));
+        return console.log(clk.yellow(this && this.worker &&  `WORKER ${this.worker.id}` || 'MAIN'), time, Array.from(arguments).join(' '));
     }
 
     debug() {
         if (!this.debug) return;
         const time = clk.cyan.bold(`[${moment().format('L')} @ ${moment().format('HH:MM:SS')}]`);
-        return console.log(time, clk.black.bgWhite(' DEBUG '), Array.from(arguments).join(' '));
+        return console.log(clk.yellow(this && this.worker &&  `WORKER ${this.worker.id}` || 'MAIN'), time, clk.black.bgWhite(' DEBUG '), Array.from(arguments).join(' '));
     }
 
     custom(opt) {
@@ -69,10 +71,11 @@ class Logger extends EventEmitter {
         if (!opt.bgColor) opt.bgColor = 'black';
         if (!opt.color) opt.color = 'white';
         if (!clk[opt.color.toLocaleLowerCase()]) throw new Error('Invalid color');
+        const proc = clk.yellow(this && this.worker &&  `WORKER ${this.worker.id}` || 'MAIN');
         const time = clk.cyan.bold(`[${moment().format('L')} @ ${moment().format('HH:MM:SS')}]`);
         const bg = clk[`bg${opt.bgColor.toLocaleLowerCase().charAt(0).toLocaleUpperCase()}${opt.bgColor.toLocaleLowerCase().slice(1)}`];
         if (!bg) throw new Error('Invalid background color');
-        const str = `${time} ${bg[opt.color.toLocaleLowerCase()](` ${opt.name} `)} ${Array.from(arguments).slice(1).join(' ')}`;
+        const str = `${proc} ${time} ${bg[opt.color.toLocaleLowerCase()](` ${opt.name} `)} ${Array.from(arguments).slice(1).join(' ')}`;
         return opt.error && console.error(str) || console.log(str);
     }
 

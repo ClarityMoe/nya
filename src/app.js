@@ -16,6 +16,7 @@ const os = require('os');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const numCPUs = os.cpus().length;
+const Logger = require('./utils/logger.js');
 const blocks = {};
 
 hbs.registerHelper('extend', function(name, context) {
@@ -31,30 +32,34 @@ hbs.registerHelper('block', function(name) {
 });
 
 if (cluster.isMaster) {
-    console.log(`Master ${process.pid} is running`);
+    const logger = new Logger({ debug: false });
+    
+    logger.info(`Master ${process.pid} is running`);
 
     for (let i = 0; i < numCPUs; i++) cluster.fork();
 
     cluster.on('exit', (worker, code) => {
-        console.log(`Worker ${worker.process.pid} dieded :<\nCode: ${code}`);
+        logger.warn(`Worker ${worker.process.pid} dieded :<\nCode: ${code}`);
         cluster.fork();
     });
 } else {
-    console.log(`Worker ${process.pid} started`);
+    const logger = new Logger({ debug: false }, cluster.worker);
+
+    logger.info(`Worker ${process.pid} started`);
 
     let port = 5000;
     const app = express();
     const server = http.createServer(app);
 
-    server.on('listening', () => console.log(`Started listening on port ${port}`));
+    server.on('listening', () => logger.info(`Started listening on port ${port}`));
 
     server.on('error', (err) => {
 
-        if (err.syscall === 'listen') return console.error(err);
+        if (err.syscall === 'listen') return logger.error(err);
 
         switch (err.code) {
         case 'EACCES': {
-            console.error(`Port ${port} is blocked on your network :<`);
+            logger.warn(`Port ${port} is blocked on your network :<`);
             server.close();
             port++;
             app.set('port', port);
@@ -62,7 +67,7 @@ if (cluster.isMaster) {
             break;
         }
         case 'EADDRINUSE': {
-            console.log(`Something is already using port ${port} :<`);
+            logger.warn(`Something is already using port ${port} :<`);
             server.close();
             port++;
             app.set('port', port );
@@ -70,7 +75,7 @@ if (cluster.isMaster) {
             break;
         }
         default: {
-            console.error(err);
+            logger.error(err);
             break;
         }
         }
@@ -80,6 +85,7 @@ if (cluster.isMaster) {
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hbs');
 
+    app.use((req, res, next) => logger.request(req, res, next));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(bodyParser.json());
     app.use(favicon(path.join(__dirname, 'public', 'img', 'favicon.png'))); 
