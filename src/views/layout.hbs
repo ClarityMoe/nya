@@ -1,58 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="StarterApp">
+<html lang="en" ng-app="awauApp">
 
 <head>
-  <title>test</title>
+  <title>{{title}}</title>
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+  <link rel="stylesheet" href="/css/index.css">
 </head>
-<style>
-  md-content.md-default-theme {
-    background-color: #eee;
-  }
-
-  md-card {
-    background-color: #fff;
-  }
-
-  md-card h2:first-of-type {
-    margin-top: 0;
-  }
-
-  md-toolbar .md-button.md-default-theme {
-    border-radius: 99%;
-  }
-
-  h2 {
-    font-weight: 400;
-  }
-
-  .md-toolbar-tools-bottom {
-    font-size: small;
-  }
-
-  .md-toolbar-tools-bottom :last-child {
-    opacity: 0.8;
-  }
-
-  md-toolbar:not(.md-hue-1),
-  .md-fab {
-    fill: #fff;
-  }
-
-  md-sidenav {
-    fill: #737373;
-  }
-
-  md-sidenav ng-md-icon {
-    position: relative;
-    top: 5px;
-  }
-
-  .user-avatar {
-    border-radius: 99%;
-  }
-</style>
-
 <body layout="row" ng-controller="AppCtrl">
   <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
     <md-toolbar class="md-tall md-hue-2">
@@ -124,7 +77,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
 
   <script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
-  <script src="/html/index.js"></script>
+  <script src="/js/index.js"></script>
 </body>
 
 </html>
