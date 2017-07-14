@@ -14,7 +14,21 @@ const path = require('path');
 const cluster = require('cluster');
 const os = require('os');
 const bodyParser = require('body-parser');
+const hbs = require('hbs');
 const numCPUs = os.cpus().length;
+const blocks = {};
+
+hbs.registerHelper('extend', function(name, context) {
+    let block = blocks[name];
+    if (!block) block = blocks[name] = [];
+    block.push(context.fn(this));
+});
+
+hbs.registerHelper('block', function(name) {
+    const val = (blocks[name] || []).join('\n');
+    blocks[name] = [];
+    return val;
+});
 
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
@@ -64,7 +78,7 @@ if (cluster.isMaster) {
 
     app.set('port', port);
     app.set('views', path.join(__dirname, 'views'));
-    app.set('view engine', 'pug');
+    app.set('view engine', 'hbs');
 
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(bodyParser.json());
