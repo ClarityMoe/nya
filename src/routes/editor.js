@@ -7,8 +7,7 @@
 
  router.get('/', (req, res) => {
      res.render('editor', {
-         title: 'Nya | Editor',
-         layout: 'layout-editor'
+         title: 'Nya | Editor'
      });
  });
 
