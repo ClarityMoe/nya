@@ -15,9 +15,7 @@ const cluster = require('cluster');
 const os = require('os');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
-const WebSocketServer = require('uws').Server;
-const util = require('util');
-const OPCODES = require('./utils/constants.js').OPCODES;
+const WSServer = require('./utils/websocketserver.js');
 const numCPUs = os.cpus().length;
 const Logger = require('./utils/logger.js');
 const blocks = {};
@@ -104,80 +102,7 @@ if (cluster.isMaster) {
 
     /* Websocket */
 
-    const wss = new WebSocketServer({ port: 3000 });
+    const wss = new WSServer(cluster.worker);
 
-    const handleMessage = (msg) => {
-        switch (msg.t) {
-        case 'GET_DIR': {
-            break;
-        }
-        case 'GET_FILE': {
-            break;
-        }
-        case 'SAVE_FILE': {
-            break;
-        }
-        case 'EXEC_SHELL': {
-            break;
-        }
-        default: {
-            wslogger.warn('Unknown event:', msg.t);
-            break;
-        }
-        }
-    };
-
-    wss.on('connection', (ws) => {
-
-        ws.send(JSON.stringify({
-            op: OPCODES.READY,
-            d: {
-                heartbeat: 100
-            }
-        }))
-
-        ws.on('message', (msg) => {
-            try {
-                msg = JSON.parse(msg);
-            } catch (e) {
-                return wslogger.error('Couldn\'t parse message:', util.inspect(msg));
-            }
-            switch (msg.op) {
-
-            case OPCODES.HEARTBEAT: { // 1
-                break;
-            }
-
-            case OPCODES.IDENTIFY: { // 2
-                break;
-            }
-
-            case OPCODES.READY: { // 3
-                break;
-            }
-
-            case OPCODES.MESSAGE: { // 4
-                handleMessage(msg);
-                break;
-            }
-
-            case OPCODES.RESUME: { // 5
-                break;
-            }
-
-            case OPCODES.STATE_UPDATE: { // 6
-                break;
-            }
-
-            case OPCODES.STATUS_UPDATE: { // 7
-                break;
-            }
-
-            default: {
-                if (d.op) return wslogger.warn('Unknown OP code:', msg.op);
-                else return wslogger.warn('Unknown message:', util.inspect(msg));
-            }
-            }
-        });
-    });
+    
 }

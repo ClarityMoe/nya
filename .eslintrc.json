@@ -37,6 +37,6 @@
     "globals": {
         "angular": true,
         "monaco": true,
-        "io": true
+        "WSConnection": true
     }
 }
