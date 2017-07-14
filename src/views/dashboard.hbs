@@ -1,25 +1,39 @@
 {{#extend "content"}}
 <ui-view layout="column" layout-fill layout-padding>
-  <div class="inset" hide-sm></div>
-  <ng-switch on="data.selectedIndex" class="tabpanel-container">
-    <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()"
-      layout="row" layout-align="center center">
-      <md-card flex-gt-sm="90" flex-gt-md="80">
-        <md-card-content>
-          <h2>Projects</h2>
-        </md-card-content>
-      </md-card>
-    </div>
-    <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()"
-      layout="row" layout-align="center center">
-      <md-card flex-gt-sm="90" flex-gt-md="80">
-        <md-card-content>
-          <h2>Statistics</h2>
-        </md-card-content>
-      </md-card>
-    </div>
+    <div class="inset" hide-sm></div>
+    <ng-switch on="data.selectedIndex" class="tabpanel-container">
+        <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()"
+            layout="row" layout-align="center center">
+            <md-card flex-gt-sm="90" flex-gt-md="80">
+                <md-card-content>
+                    <md-list-item>
+                        <md-subheader class="md-no-sticky">Projects</md-subheader>
+                        {{#if projects}} 
+                            {{#each projects as project}}
+                                <md-list-item ng-click="gotoProject({{project.name}}, $event)" class="noright">
+                                    <img alt="icon_{{project.name}}" ng-src="{{project.icon}}" class="md-avatar" />
+                                    <p>{{project.name}}</p>
+                                    <md-checkbox class="md-secondary project-button"></md-checkbox>
+                                </md-list-item>
+                            {{/each}}
+                        {{else}}
+                            <md-list-item class="noright">
+                                <p><i>Hello wo-, where's everyone?</i></p>
+                            </md-list-item>
+                        {{/if}}
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()"
+            layout="row" layout-align="center center">
+            <md-card flex-gt-sm="90" flex-gt-md="80">
+                <md-card-content>
+                </md-card-content>
+            </md-card>
+        </div>
 
-  </ng-switch>
+    </ng-switch>
 
 </ui-view>
 {{/extend}}
