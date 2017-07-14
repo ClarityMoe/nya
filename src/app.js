@@ -93,6 +93,7 @@ if (cluster.isMaster) {
     /* routes */
 
     app.use('/', require('./routes/index.js'));
+    app.use('/editor', require('./routes/editor.js'));
 
     /* end */
     server.listen(port, '0.0.0.0');
