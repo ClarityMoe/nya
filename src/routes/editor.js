@@ -10,3 +10,5 @@
          title: 'Nya | Editor'
      });
  });
+
+ module.exports = router;
