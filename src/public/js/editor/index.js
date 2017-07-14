@@ -6,7 +6,7 @@
 
 var app = angular.module('awauApp', ['ngMaterial', 'ngMdIcons']);
 var ws = new WSConnection('test');
-var editorFrame = document.getElementById('monaco-frame');
+var editorFrame = document.getElementById('editor-frame');
 var editorWindow = null;
 var editor = null;
 var monaco = null;
