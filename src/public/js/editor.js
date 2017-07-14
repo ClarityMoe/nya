@@ -9,4 +9,9 @@ require(['vs/editor/editor.main'], function () {
         theme: 'vs-dark',
         language: 'javascript'
     });
+
+    window.onresize = function() {
+        editor.layout();
+    };
+
 });
