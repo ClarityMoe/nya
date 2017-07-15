@@ -10,6 +10,17 @@ iframe {
     border: none;
 }
 
+::-webkit-scrollbar {
+    background: transparent;
+    border: 1px solid hsla(0,0%,47%,.4);
+    width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsla(0,0%,47%,.4);
+    transition: opacity .1s linear;
+}
+
 * {
     box-sizing: border-box;
 }

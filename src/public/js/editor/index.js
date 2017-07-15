@@ -17,16 +17,18 @@ var terminal = document.getElementById('terminal');
 var xterm = new Terminal({
     cursorBlink: true,
     cols: 160,
-    rows: 20
+    rows: 20,
+    scrollback: 1000
 });
 
 xterm.open(terminal);
 
 function _connectTerm(id) {
     dockerSock = new WebSocket('ws://' + window.location.hostname + ':5000/pty/docker/' + id); // 7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c
-    xterm.attach(dockerSock);
-    xterm._initialized = true;
-
+    dockerSock.onopen = function() {
+        xterm.attach(dockerSock);
+        xterm._initialized = true;
+    };
 }
 
 function _initTerm() {
@@ -42,7 +44,7 @@ function _initTerm() {
         });
         setInterval(function() {
             if (!dockerContainer.Id) {
-                return;
+                doRequest();
             } else if (!dockerSock || dockerSock.readyState === WebSocket.CLOSED) {
                 doRequest();
                 _connectTerm();
