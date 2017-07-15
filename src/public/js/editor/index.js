@@ -13,6 +13,12 @@ var monaco = null;
 var fileman = document.getElementById('file-man');
 var terminal = document.getElementById('terminal');
 
+var xterm = new Terminal();
+
+xterm.open(terminal);
+xterm.fit();
+xterm.write('Hello from \033[1;3;31mxterm.js\033[0m $ ')
+
 editorFrame.onload = function () {
     editorWindow = editorFrame.contentWindow;
     editor = editorWindow.editor;
