@@ -1,6 +1,6 @@
 # Nya
 
-Nya is a Web/Desktop IDE based from Theia.
+Nya is a Web/Desktop IDE.
 
 
 It's nothing special, it's jsut a fucked up IDE.
