@@ -37,6 +37,7 @@
     "globals": {
         "angular": true,
         "monaco": true,
-        "WSConnection": true
+        "WSConnection": true,
+        "Terminal": true
     }
 }

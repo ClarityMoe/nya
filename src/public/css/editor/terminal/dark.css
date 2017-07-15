@@ -1,0 +1,167 @@
+#terminal .xterm .xterm-color-0 {
+    color: #000000;
+}
+
+#terminal .xterm .xterm-bg-color-0 {
+    background-color: #000000;
+}
+
+#terminal .xterm .xterm-color-1 {
+    color: #cd3131;
+}
+
+#terminal .xterm .xterm-bg-color-1 {
+    background-color: #cd3131;
+}
+
+#terminal .xterm .xterm-color-2 {
+    color: #0dbc79;
+}
+
+#terminal .xterm .xterm-bg-color-2 {
+    background-color: #0dbc79;
+}
+
+#terminal .xterm .xterm-color-3 {
+    color: #e5e510;
+}
+
+#terminal .xterm .xterm-bg-color-3 {
+    background-color: #e5e510;
+}
+
+#terminal .xterm .xterm-color-4 {
+    color: #2472c8;
+}
+
+#terminal .xterm .xterm-bg-color-4 {
+    background-color: #2472c8;
+}
+
+#terminal .xterm .xterm-color-5 {
+    color: #bc3fbc;
+}
+
+#terminal .xterm .xterm-bg-color-5 {
+    background-color: #bc3fbc;
+}
+
+#terminal .xterm .xterm-color-6 {
+    color: #11a8cd;
+}
+
+#terminal .xterm .xterm-bg-color-6 {
+    background-color: #11a8cd;
+}
+
+#terminal .xterm .xterm-color-7 {
+    color: #e5e5e5;
+}
+
+#terminal .xterm .xterm-bg-color-7 {
+    background-color: #e5e5e5;
+}
+
+#terminal .xterm .xterm-color-8 {
+    color: #666666;
+}
+
+#terminal .xterm .xterm-bg-color-8 {
+    background-color: #666666;
+}
+
+#terminal .xterm .xterm-color-9 {
+    color: #f14c4c;
+}
+
+#terminal .xterm .xterm-bg-color-9 {
+    background-color: #f14c4c;
+}
+
+#terminal .xterm .xterm-color-10 {
+    color: #23d18b;
+}
+
+#terminal .xterm .xterm-bg-color-10 {
+    background-color: #23d18b;
+}
+
+#terminal .xterm .xterm-color-11 {
+    color: #f5f543;
+}
+
+#terminal .xterm .xterm-bg-color-11 {
+    background-color: #f5f543;
+}
+
+#terminal .xterm .xterm-color-12 {
+    color: #3b8eea;
+}
+
+#terminal .xterm .xterm-bg-color-12 {
+    background-color: #3b8eea;
+}
+
+#terminal .xterm .xterm-color-13 {
+    color: #d670d6;
+}
+
+#terminal .xterm .xterm-bg-color-13 {
+    background-color: #d670d6;
+}
+
+#terminal .xterm .xterm-color-14 {
+    color: #29b8db;
+}
+
+#terminal .xterm .xterm-bg-color-14 {
+    background-color: #29b8db;
+}
+
+#terminal .xterm .xterm-color-15 {
+    color: #e5e5e5;
+}
+
+#terminal .xterm .xterm-bg-color-15 {
+    background-color: #e5e5e5;
+}
+
+#terminal .xterm {
+    color: #cccccc;
+}
+
+#terminal .xterm:not(.xterm-cursor-style-underline):not(.xterm-cursor-style-bar).focus .terminal-cursor,
+#terminal .xterm:not(.xterm-cursor-style-underline):not(.xterm-cursor-style-bar):focus .terminal-cursor {
+    background-color: #cccccc
+}
+
+#terminal .xterm:not(.focus):not(:focus) .terminal-cursor {
+    outline-color: #cccccc;
+}
+
+#terminal .xterm.xterm-cursor-style-bar .terminal-cursor::before,
+#terminal .xterm.xterm-cursor-style-underline .terminal-cursor::before {
+    background-color: #cccccc;
+}
+
+#terminal .xterm.xterm-cursor-style-bar.focus.xterm-cursor-blink .terminal-cursor::before,
+#terminal .xterm.xterm-cursor-style-underline.focus.xterm-cursor-blink .terminal-cursor::before {
+    background-color: #cccccc;
+}
+
+#terminal .xterm:not(.xterm-cursor-style-underline):not(.xterm-cursor-style-bar).focus .terminal-cursor,
+#terminal .xterm:not(.xterm-cursor-style-underline):not(.xterm-cursor-style-bar):focus .terminal-cursor {
+    color: #1e1e1e
+}
+
+#terminal .terminal-message-widget {
+    background-color: #2d2d30;
+}
+
+#terminal .terminal-message-widget {
+    border: 1px solid #454545;
+}
+
+#terminal .terminal-message-widget {
+    color: #d4d4d4;
+}
