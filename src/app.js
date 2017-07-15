@@ -45,13 +45,15 @@ if (cluster.isMaster) {
     });
 } else {
     const logger = new Logger({ debug: false }, cluster.worker);
-    const wslogger = new Logger({ debug: false, prefix: ' WEBSOCKET ' }, cluster.worker);
 
     logger.info(`Worker ${process.pid} started`);
 
     let port = 5000;
     const app = express();
     const server = http.createServer(app);
+    /* eslint-disable no-unused-vars */
+    const expressWs = require('express-ws')(app, server);
+    /* eslint-enable no-unused-vars */
 
     server.on('listening', () => logger.info(`Started listening on port ${port}`));
 
@@ -96,6 +98,7 @@ if (cluster.isMaster) {
 
     app.use('/', require('./routes/index.js'));
     app.use('/editor', require('./routes/editor.js'));
+    app.use('/pty', require('./routes/pty.js'))
 
     /* end */
     server.listen(port, '0.0.0.0');

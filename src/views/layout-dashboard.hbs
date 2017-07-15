@@ -14,12 +14,11 @@
             <span flex></span>
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <img class="user-avatar" height="64" width="64" src="/img/noud.png">
-                <span></span> 
-                {{#if user}}
-                    <div>{{user.username}}</div>
-                    <div>{{user.email}}</div>
-                {{else}} 
-                    <div>Guest</div>
+                <span></span> {{#if user}}
+                <div>{{user.username}}</div>
+                <div>{{user.email}}</div>
+                {{else}}
+                <div>Guest</div>
                 {{/if}}
             </div>
         </md-toolbar>
@@ -75,6 +74,20 @@
             {{{block "content"}}}
         </md-content>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAsRF86-y0RgzegbpS_UaIOOqXGHNHE7L0",
+            authDomain: "awau-733cf.firebaseapp.com",
+            databaseURL: "https://awau-733cf.firebaseio.com",
+            projectId: "awau-733cf",
+            storageBucket: "awau-733cf.appspot.com",
+            messagingSenderId: "508301461820"
+        };
+        firebase.initializeApp(config);
+    </script>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>

@@ -13,6 +13,20 @@
 
 <body ng-controller="EditorCtrl">
     {{{block "body"}}}
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAsRF86-y0RgzegbpS_UaIOOqXGHNHE7L0",
+            authDomain: "awau-733cf.firebaseapp.com",
+            databaseURL: "https://awau-733cf.firebaseio.com",
+            projectId: "awau-733cf",
+            storageBucket: "awau-733cf.appspot.com",
+            messagingSenderId: "508301461820"
+        };
+        firebase.initializeApp(config);
+    </script>
     <!-- angular material -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>

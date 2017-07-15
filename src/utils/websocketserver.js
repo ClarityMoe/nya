@@ -1,5 +1,4 @@
 const WebSocketServer = require('uws').Server;
-const SSHClient = require('ssh2').Client;
 const OPCODES = require('./constants.js').OPCODES;
 const Logger = require('./logger.js');
 const util = require('util');

@@ -10,14 +10,29 @@ var editorFrame = document.getElementById('editor-frame');
 var editorWindow = null;
 var editor = null;
 var monaco = null;
+var dockerSock = null;
 var fileman = document.getElementById('file-man');
 var terminal = document.getElementById('terminal');
-
 var xterm = new Terminal();
 
 xterm.open(terminal);
-xterm.fit();
-xterm.write('Hello from \033[1;3;31mxterm.js\033[0m $ ')
+
+function _initTerm() {
+    if (typeof fetch === 'undefined') {
+        throw new Error('Your browser doesn\'t support the Fetch API, please upgrade your browser or use a different one if you are on the latest version');
+    }
+
+    fetch('/pty/docker', { method: 'POST' }).then(function (res) {
+        res.json().then(function (json) {
+            console.log(json)
+            dockerSock = new WebSocket('ws://' + window.location.hostname + ':5000/pty/docker/7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c'); // replace with own test id for testing
+            xterm.attach(dockerSock);
+            xterm._initialized = true;
+        });
+    });
+}
+
+_initTerm();
 
 editorFrame.onload = function () {
     editorWindow = editorFrame.contentWindow;
@@ -27,11 +42,11 @@ editorFrame.onload = function () {
 
 ws.ws.addEventListener('msg', function (msg) {
     switch (msg.t) {
-        case 'GET_FILE_RES': {
+    case 'GET_FILE_RES': {
             editor.setValue(msg.d.content);
             break;
         }
-        default: {
+    default: {
             break;
         }
     }
@@ -43,11 +58,11 @@ app.controller('EditorCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $mdDi
 
 
 
-app.directive('resize', function($document) {
-    return function($scope, $element, $attr) {
-        $element.addEventListener('mousedown', function(event) {
+app.directive('resize', function ($document) {
+    return function ($scope, $element, $attr) {
+        $element.addEventListener('mousedown', function (event) {
             event.preventDefault();
-            
+
             $document.addEventListener('mousemove', mousemove);
             $document.addEventListener('mouseup', mouseup);
         });
@@ -62,11 +77,11 @@ app.directive('resize', function($document) {
 
                 $element.style.left = x + 'px';
 
-                document.querySelectorAll($attr['left-resize']).forEach(function(el) {
+                document.querySelectorAll($attr['left-resize']).forEach(function (el) {
                     el.style.width = x + 'px';
                 });
 
-                document.querySelectorAll($attr['right-resize']).forEach(function(el) {
+                document.querySelectorAll($attr['right-resize']).forEach(function (el) {
                     el.style.left = (x + parseInt($attr['resize-width'])) + 'px';
                 });
 
@@ -74,13 +89,13 @@ app.directive('resize', function($document) {
             } else {
                 var y = window.innerHeight - event.pageY;
 
-                $element.style.bottom =  y + 'px';
+                $element.style.bottom = y + 'px';
 
-                document.querySelectorAll($attr['top-resize']).forEach(function(el) {
+                document.querySelectorAll($attr['top-resize']).forEach(function (el) {
                     el.style.bottom = (y + parseInt($attr['resize-height'])) + 'px';
                 });
 
-                document.querySelectorAll($attr['bottom-resize']).forEach(function(el) {
+                document.querySelectorAll($attr['bottom-resize']).forEach(function (el) {
                     el.style.height = y + 'px';
                 });
             }
@@ -88,10 +103,10 @@ app.directive('resize', function($document) {
 
         function mouseup() {
             $document.removeEventListener('mousemove', mousemove);
-            $document.removeEventListener('mouseup'. mouseup);
+            $document.removeEventListener('mouseup'.mouseup);
         }
-    }
-})
+    };
+});
 
 app.config(function ($mdThemingProvider) {
     $mdThemingProvider.definePalette('awauDark', {
@@ -147,26 +162,26 @@ app.config(function ($mdThemingProvider) {
         'A700': 'd40000',
         'contrastDefaultColor': 'light',
         'contrastDarkColors': [
-          '50',
-          '100',
-          '200',
-          'A100'
+            '50',
+            '100',
+            '200',
+            'A100'
         ],
         'contrastLightColors': [
-          '300',
-          '400',
-          '500',
-          '600',
-          '700',
-          '800',
-          '900',
-          'A200',
-          'A400',
-          'A700'
+            '300',
+            '400',
+            '500',
+            '600',
+            '700',
+            '800',
+            '900',
+            'A200',
+            'A400',
+            'A700'
         ]
-      });
+    });
 
     $mdThemingProvider.theme('default')
         .primaryPalette('vscodeGrey')
-        .accentPalette('grey')
-})
+        .accentPalette('grey');
+});
