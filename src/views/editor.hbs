@@ -18,7 +18,7 @@
 
     <div layout="row" layout-align="end" style="height: 100%">
 
-        <md-toolbar class="md-primary md-hue-1" style="width:20px">
+        <md-toolbar class="md-primary md-hue-1" style="width:20px;background-color: rgb(30, 30, 31)">
             <div layout="column" class="rotate-horizontal">
                 <md-menu id="projects">
                     <md-button>
@@ -49,10 +49,9 @@
 
         <md-toolbar id="resize-file-man"></md-toolbar>
 
-        <div id="editor">
+        <div id="editor" layout="column" layout-align="end none">
             <iframe id="editor-frame" src="/editor/iframe" flex></iframe>
-            <div id="terminal">
-            </div>
+            <div id="terminal" flex></div>
         </div>
 
     </div>

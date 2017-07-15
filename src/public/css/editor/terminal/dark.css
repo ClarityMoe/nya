@@ -1,3 +1,12 @@
+#terminal .xterm * {
+    font-family: 'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'
+}
+
+#terminal .xterm,
+#terminal .xterm-viewport {
+    background-color: rgb(16, 16, 16);
+}
+
 #terminal .xterm .xterm-color-0 {
     color: #000000;
 }

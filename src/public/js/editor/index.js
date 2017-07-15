@@ -11,25 +11,48 @@ var editorWindow = null;
 var editor = null;
 var monaco = null;
 var dockerSock = null;
+var dockerContainer = {};
 var fileman = document.getElementById('file-man');
 var terminal = document.getElementById('terminal');
-var xterm = new Terminal();
+var xterm = new Terminal({
+    cursorBlink: true,
+    cols: 160,
+    rows: 20
+});
 
 xterm.open(terminal);
+
+function _connectTerm(id) {
+    dockerSock = new WebSocket('ws://' + window.location.hostname + ':5000/pty/docker/' + id); // 7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c
+    xterm.attach(dockerSock);
+    xterm._initialized = true;
+
+}
 
 function _initTerm() {
     if (typeof fetch === 'undefined') {
         throw new Error('Your browser doesn\'t support the Fetch API, please upgrade your browser or use a different one if you are on the latest version');
     }
-
-    fetch('/pty/docker', { method: 'POST' }).then(function (res) {
-        res.json().then(function (json) {
-            console.log(json)
-            dockerSock = new WebSocket('ws://' + window.location.hostname + ':5000/pty/docker/7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c'); // replace with own test id for testing
-            xterm.attach(dockerSock);
-            xterm._initialized = true;
+    function doRequest() {
+        fetch('/pty/docker', { method: 'POST' }).then(function (res) {
+            res.json().then(function (json) {
+                dockerContainer = json.container;
+                _connectTerm(json.container.Id);
+            });
         });
-    });
+        setInterval(function() {
+            if (!dockerContainer.Id) {
+                return;
+            } else if (!dockerSock || dockerSock.readyState === WebSocket.CLOSED) {
+                doRequest();
+                _connectTerm();
+            } else {
+                clearInterval(this)
+            }
+        }, 250);
+    }
+
+    doRequest();    
 }
 
 _initTerm();

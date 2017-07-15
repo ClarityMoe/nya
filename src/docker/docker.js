@@ -31,7 +31,7 @@ class Docker {
 
     _get(path) {
         try {
-            return JSON.parse(execSync(`${this._CURL_PATH} --unix-socket /var/run/docker.sock "http://localhost/v${this._DOCKER_API_VER}${path}" 2>/dev/null`).toString());
+            return execSync(`${this._CURL_PATH} --unix-socket /var/run/docker.sock "http://localhost/v${this._DOCKER_API_VER}${path}" 2>/dev/null`).toString();
         } catch (e) {
             throw e;
         }
@@ -39,7 +39,7 @@ class Docker {
 
     _post(path, data) {
         try {
-            return JSON.parse(execSync(`${this._CURL_PATH} -XPOST --unix-socket /var/run/docker.sock -d '${data && JSON.stringify(data) || '{}'}' -H 'Content-Type: application/json' "http://localhost/v${this._DOCKER_API_VER}${path}" 2>/dev/null`));
+            return execSync(`${this._CURL_PATH} -XPOST --unix-socket /var/run/docker.sock -d '${data && JSON.stringify(data) || '{}'}' -H 'Content-Type: application/json' "http://localhost/v${this._DOCKER_API_VER}${path}" 2>/dev/null`);
         } catch (e) {
             throw e;
         }
@@ -54,7 +54,7 @@ class Docker {
 
     get containers() {
         try {
-            return this._get('/containers/json?all=1');
+            return JSON.parse(this._get('/containers/json?all=1'));
         } catch(e) {
             throw e;
         }
