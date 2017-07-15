@@ -1,0 +1,27 @@
+/* 
+
+Custom styling for File Explorer
+
+*/
+
+nya-fileexplorer .fa-ul {
+    margin-left: 1.5em;
+}
+
+nya-fileexplorer .fa-li {
+    left: -1.5em;
+    width: 1.5em;
+}
+
+nya-fileexplorer .fa-li.folder {
+    color: #dd0;
+}
+
+nya-fileexplorer .fa-li.file {
+    color: white;
+}
+
+nya-fileexplorer a {
+    text-decoration: none;
+    color: white;
+}
