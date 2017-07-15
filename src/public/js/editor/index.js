@@ -22,6 +22,8 @@ var xterm = new Terminal({
 });
 
 xterm.open(terminal);
+xterm.resize(terminal.offsetWidth / 9.50, terminal.offsetHeight / 17.75)
+xterm.write('\033[1;3;31mNOTE:\033[0m If you try to exit the container you will lose all your files, don\'t even try, ok?\n');
 
 function _connectTerm(id) {
     dockerSock = new WebSocket('ws://' + window.location.hostname + ':5000/pty/docker/' + id); // 7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c
@@ -29,6 +31,12 @@ function _connectTerm(id) {
         xterm.attach(dockerSock);
         xterm._initialized = true;
     };
+}
+
+function _resizeTerm() {
+    var x = terminal.offsetWidth / 9.50;
+    var y = terminal.offsetHeight / 17.75;
+    xterm.resize(x, y);
 }
 
 function _initTerm() {
@@ -46,6 +54,7 @@ function _initTerm() {
             if (!dockerContainer.Id) {
                 doRequest();
             } else if (!dockerSock || dockerSock.readyState === WebSocket.CLOSED) {
+                doRequest();
                 _connectTerm();
             } else {
                 clearInterval(this)
@@ -57,6 +66,10 @@ function _initTerm() {
 }
 
 _initTerm();
+
+window.addEventListener('resize', function(e) {
+    _resizeTerm();
+})
 
 editorFrame.onload = function () {
     editorWindow = editorFrame.contentWindow;
