@@ -2,6 +2,7 @@ html,
 body {
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 * {
@@ -14,4 +15,35 @@ body {
 
 .editor-nav {
     min-height: 36px;
+}
+
+.rotate-horizontal * {
+    font-size: 15px;
+}
+
+#projects {
+    transform: rotate(-90deg) translateX(-90px);
+}
+
+#tasks {
+    transform: rotate(-90deg) translateX(-180px);
+}
+
+#file-man {
+    width: 200px;
+}
+
+#resize-file-man {
+    width: 5px;
+    cursor: ew-resize;
+}
+
+#editor {
+    width: 100%;
+    height: 100%;
+}
+
+#editor-frame {
+    width: 100%;
+    height: 100%;
 }

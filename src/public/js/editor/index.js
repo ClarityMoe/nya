@@ -10,6 +10,8 @@ var editorFrame = document.getElementById('editor-frame');
 var editorWindow = null;
 var editor = null;
 var monaco = null;
+var fileman = document.getElementById('file-man');
+var terminal = document.getElementById('terminal');
 
 editorFrame.onload = function () {
     editorWindow = editorFrame.contentWindow;
@@ -32,6 +34,58 @@ ws.ws.addEventListener('msg', function (msg) {
 app.controller('EditorCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog) {
 
 });
+
+
+
+app.directive('resize', function($document) {
+    return function($scope, $element, $attr) {
+        $element.addEventListener('mousedown', function(event) {
+            event.preventDefault();
+            
+            $document.addEventListener('mousemove', mousemove);
+            $document.addEventListener('mouseup', mouseup);
+        });
+
+        function mousemove(event) {
+            if ($attr['resize'] === 'vertical') {
+                var x = event.pageX;
+
+                if ($attr['max-resize'] && x > $attr['max-resize']) {
+                    x = parseInt($attr['max-resize']);
+                }
+
+                $element.style.left = x + 'px';
+
+                document.querySelectorAll($attr['left-resize']).forEach(function(el) {
+                    el.style.width = x + 'px';
+                });
+
+                document.querySelectorAll($attr['right-resize']).forEach(function(el) {
+                    el.style.left = (x + parseInt($attr['resize-width'])) + 'px';
+                });
+
+
+            } else {
+                var y = window.innerHeight - event.pageY;
+
+                $element.style.bottom =  y + 'px';
+
+                document.querySelectorAll($attr['top-resize']).forEach(function(el) {
+                    el.style.bottom = (y + parseInt($attr['resize-height'])) + 'px';
+                });
+
+                document.querySelectorAll($attr['bottom-resize']).forEach(function(el) {
+                    el.style.height = y + 'px';
+                });
+            }
+        }
+
+        function mouseup() {
+            $document.removeEventListener('mousemove', mousemove);
+            $document.removeEventListener('mouseup'. mouseup);
+        }
+    }
+})
 
 app.config(function ($mdThemingProvider) {
     $mdThemingProvider.definePalette('awauDark', {

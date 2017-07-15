@@ -1,22 +1,62 @@
 {{#extend "body"}}
-<div layout="column" layout-align="start stretch">
+<div layout="column" layout-align="start stretch" style="height: 100%">
+
     <md-toolbar class="editor-nav md-menu-toolbar">
-            <div layout="row">
-                <md-menu-bar>
-                    <md-menu class="editor-buttons">
-                        <md-button>
-                            File
-                        </md-button>
-                        <md-button>
-                            Edit
-                        </md-button>
-                        <md-button>
-                            View
-                        </md-button>
-                    </md-menu>
-                </md-menu-bar>
+        <div layout="row">
+            <md-menu-bar>
+                <md-menu class="editor-buttons">
+                    <md-button>
+                        File
+                    </md-button>
+                    <md-button>
+                        Edit
+                    </md-button>
+                </md-menu>
+            </md-menu-bar>
+        </div>
+    </md-toolbar>
+
+    <div layout="row" layout-align="end" style="height: 100%">
+
+        <md-toolbar class="md-primary md-hue-1" style="width:20px">
+            <div layout="column" class="rotate-horizontal">
+                <md-menu id="projects">
+                    <md-button>
+                        <span>Projects</span>
+                    </md-button>
+                </md-menu>
+                <md-menu id="tasks">
+                    <md-button>
+                        <span>Tasks</span>
+                    </md-button>
+                </md-menu>
             </div>
         </md-toolbar>
-    <iframe id="editor-frame" src="/editor/iframe"></iframe>
+
+
+
+        <md-toolbar class="md-hue-2" id="file-man">
+
+            <div layout="column" layout-align="start start">
+                <md-menu-bar>
+                    <md-menu>
+                    </md-menu>
+                </md-menu-bar>
+                
+            </div>
+
+        </md-toolbar>
+
+        <md-toolbar id="resize-file-man"></md-toolbar>
+
+        <div id="editor">
+            <iframe id="editor-frame" src="/editor/iframe" flex></iframe>
+            <div id="terminal" class="xterm">
+
+            </div>
+        </div>
+
+    </div>
+
 </div>
 {{/extend}}
