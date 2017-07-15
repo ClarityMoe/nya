@@ -64,11 +64,11 @@ class TabElement extends HTMLElement {
 customElements.define(TabElement.tag, TabElement);
 
 export default class TabFolder extends HTMLElement {
-    static tag = 'two-tab-folder';
-    static attributeLabel = 'two-class-label';
-    static classClosable = 'two-tab-closable';
-    static classActive = 'two-tab-active';
-    static classHeader = 'two-tab-header';
+    static tag = 'nya-tab-folder';
+    static attributeLabel = 'nya-class-label';
+    static classClosable = 'nya-tab-closable';
+    static classActive = 'nya-tab-active';
+    static classHeader = 'nya-tab-header';
 
     currentTab: TabElement;
 
