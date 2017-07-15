@@ -51,7 +51,7 @@ function _initTerm() {
             } else {
                 clearInterval(this)
             }
-        }, 250);
+        }, 1000);
     }
 
     doRequest();    
