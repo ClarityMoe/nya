@@ -9,7 +9,7 @@
  import * as path from 'path';
 
  export class EditorTab extends HTMLElement {
-     static tag ='two-editortab';
+     static tag ='nya-editortab';
 
      editor: Editor;
      a: HTMLAnchorElement;
