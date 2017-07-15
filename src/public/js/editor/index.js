@@ -46,12 +46,11 @@ function _initTerm() {
             if (!dockerContainer.Id) {
                 doRequest();
             } else if (!dockerSock || dockerSock.readyState === WebSocket.CLOSED) {
-                doRequest();
                 _connectTerm();
             } else {
                 clearInterval(this)
             }
-        }, 1000);
+        }, 5000);
     }
 
     doRequest();    
