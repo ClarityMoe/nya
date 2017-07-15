@@ -63,3 +63,17 @@ iframe {
     width: 100%;
     background-color: #1E1E1E;
 }
+
+#bottom-toolbar {
+    min-height: 25px;
+    background-color: rgb(30, 30, 31)
+}
+
+#bottom-toolbar i {
+    font-size: 20px;
+    transform: translateY(3px);
+}
+
+#bottom-toolbar * {
+    vertical-align: center
+}

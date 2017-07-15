@@ -53,8 +53,32 @@
             <iframe id="editor-frame" src="/editor/iframe" flex></iframe>
             <div id="terminal" flex></div>
         </div>
-
     </div>
+
+    <md-toolbar class="md-primary md-hue-1" id="bottom-toolbar">
+        <div layout="row">
+            <md-menu>
+                <md-menu-bar class="util-icons">
+                    <md-button>
+                        <i class="material-icons">code</i>
+                        {{#if project}}
+                            <span class="project-title">{{project.title}}</span>
+                        {{else}}
+                            <span class="project-title">Untitled</span>
+                        {{/if}}
+                    </md-button>
+                    <md-button>
+                        <i class="material-icons">error</i>
+                        <span id="errors">0</span>
+                    </md-button>
+                    <md-button>
+                        <i class="material-icons">warning</i>
+                        <span id="warnings">0</span>
+                    </md-button>
+                </md-menu-bar>
+            </md-menu>
+        </div>
+    </md-toolbar>
 
 </div>
 {{/extend}}
