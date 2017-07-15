@@ -1,11 +1,9 @@
 # Nya
 
-Nya is a Web/Desktop IDE.
-
+Nya is a Web IDE based on VSCode (or monaco-editor), IntelliJ and Eclpise Che
 
 It's nothing special, it's jsut a fucked up IDE.
 
 ## Contributing
 
 We accept contributions. That's all you need to know
-
