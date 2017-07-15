@@ -54,6 +54,11 @@ iframe {
     cursor: ew-resize;
 }
 
+#resize-terminal {
+    min-height: 5px;
+    cursor: ns-resize;
+}
+
 #editor {
     height: 100%;
     width: 100%;
