@@ -29,12 +29,8 @@ iframe {
     font-size: 12px
 }
 
-.editor-nav {
+#top-toolbar {
     min-height: 36px;
-}
-
-.rotate-horizontal * {
-    font-size: 15px;
 }
 
 #projects {
@@ -81,4 +77,21 @@ iframe {
 
 #bottom-toolbar * {
     vertical-align: center
+}
+
+#side-toolbar {
+    width:20px;
+    background-color: rgb(30, 30, 31);
+}
+
+#side-toolbar * {
+    font-size: 15px;
+}
+
+.util-icons * {
+    color: white
+}
+
+.terminal {
+    height: 100%;
 }

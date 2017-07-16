@@ -22,8 +22,16 @@ var xterm = new Terminal({
 });
 
 xterm.open(terminal);
-xterm.resize(Math.floor(terminal.offsetWidth / 9.50), Math.floor(terminal.offsetHeight / 17.75));
+
+window.addEventListener('DOMContentLoaded', function() {
+    xterm.resize(Math.floor(terminal.offsetWidth / 9.50), Math.floor(terminal.offsetHeight / 17.75));
+});
 xterm.write('\033[1;3;31mNOTE:\033[0m If you try to exit the container you will lose all your files, don\'t even try, ok?\n');
+
+function error(e) {
+    /** @todo add notification */
+    throw new Error(e);
+} 
 
 function _connectTerm(id) {
     dockerSock = new WebSocket('ws://' + window.location.hostname + ':5000/pty/docker/' + id); // 7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c
@@ -41,7 +49,7 @@ function _resizeTerm() {
 
 function _initTerm() {
     if (typeof fetch === 'undefined') {
-        throw new Error('Your browser doesn\'t support the Fetch API, please upgrade your browser or use a different one if you are on the latest version');
+        error('Your browser doesn\'t support the Fetch API, please upgrade your browser or use a different one if you are on the latest version');
     }
     function doRequest() {
         fetch('/pty/docker', { method: 'POST' }).then(function (res) {
@@ -89,8 +97,23 @@ ws.ws.addEventListener('msg', function (msg) {
     }
 });
 
-app.controller('EditorCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog) {
+app.controller('EditorCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $timeout) {
 
+    $scope.toggleProjects = function() {
+        $mdSidenav('project-nav').toggle();
+    }
+
+    $scope.toggleTasks = function() {
+        $mdSidenav('task-nav').toggle();
+    }
+
+    $scope.closeProjects = function() {
+        $mdSidenav('project-nav').close();
+    }
+
+    $scope.closeTasks = function() {
+        $mdSidenav('task-nav').close();
+    }
 });
 
 

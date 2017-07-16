@@ -1,16 +1,29 @@
 {{#extend "body"}}
 <div layout="column" layout-align="start stretch" style="height: 100%">
 
-    <md-toolbar class="editor-nav md-menu-toolbar">
+    <md-toolbar id="top-toolbar">
         <div layout="row">
             <md-menu-bar>
                 <md-menu class="editor-buttons">
                     <md-button>
-                        File
+                        <span md-menu-origin>File</span>
                     </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button>
+                                <i class="material-icons">save</i>
+                                Save
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <md-menu class="editor-buttons">
                     <md-button>
                         Edit
                     </md-button>
+                    <md-menu-content>
+
+                    </md-menu-content>
                 </md-menu>
             </md-menu-bar>
         </div>
@@ -18,18 +31,36 @@
 
     <div layout="row" layout-align="end" style="height: 100%">
 
-        <md-toolbar class="md-primary md-hue-1" style="width:20px;background-color: rgb(30, 30, 31)">
-            <div layout="column" class="rotate-horizontal">
-                <md-menu id="projects">
-                    <md-button>
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="project-nav">
+            <md-toolbar class="md-tall">
+                <span flex></span>
+                <div layout="column" class="md-toolbar-tools-bottom inset">
+                    <h1>Projects</h1>
+                </div>
+            </md-toolbar>
+        </md-sidenav>
+
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="task-nav">
+            <md-toolbar class="md-tall">
+                <span flex></span>
+                <div layout="column" class="md-toolbar-tools-bottom inset">
+                    <h2>Tasks</h2>
+                </div>
+            </md-toolbar>
+        </md-sidenav>
+
+        <md-toolbar class="md-primary md-hue-1" id="side-toolbar">
+            <div layout="column">
+                <div id="projects">
+                    <md-button ng-click="toggleProjects()">
                         <span>Projects</span>
                     </md-button>
-                </md-menu>
-                <md-menu id="tasks">
-                    <md-button>
+                </div>
+                <div id="tasks">
+                    <md-button ng-click="toggleTasks()">
                         <span>Tasks</span>
                     </md-button>
-                </md-menu>
+                </div>
             </div>
         </md-toolbar>
 
@@ -39,10 +70,7 @@
 
             <div layout="column" layout-align="start start">
                 <md-menu-bar>
-                    <md-menu>
-                    </md-menu>
                 </md-menu-bar>
-                
             </div>
 
         </md-toolbar>
@@ -58,7 +86,7 @@
 
     <md-toolbar class="md-primary md-hue-1" id="bottom-toolbar">
         <div layout="row">
-            <md-menu>
+            <div>
                 <md-menu-bar class="util-icons">
                     <md-button>
                         <i class="material-icons">code</i>
@@ -77,7 +105,7 @@
                         <span id="warnings">0</span>
                     </md-button>
                 </md-menu-bar>
-            </md-menu>
+            </div>
         </div>
     </md-toolbar>
 
