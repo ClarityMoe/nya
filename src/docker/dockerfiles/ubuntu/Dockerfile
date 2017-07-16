@@ -16,11 +16,11 @@ RUN apt update && \
     git \
     wget \
     ssh \
+    wget \
     tar \
     gzip \
     openssh-server \
     build-essential \
-    ffmpeg \
     python3-pip
     
 # node    
