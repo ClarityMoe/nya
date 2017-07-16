@@ -22,7 +22,7 @@ var xterm = new Terminal({
 });
 
 xterm.open(terminal);
-xterm.resize(terminal.offsetWidth / 9.50, terminal.offsetHeight / 17.75)
+xterm.resize(Math.floor(terminal.offsetWidth / 9.50), Math.floor(terminal.offsetHeight / 17.75));
 xterm.write('\033[1;3;31mNOTE:\033[0m If you try to exit the container you will lose all your files, don\'t even try, ok?\n');
 
 function _connectTerm(id) {
