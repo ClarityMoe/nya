@@ -75,7 +75,7 @@ class Docker {
             } catch (e) {
                 reject(e);
             }
-        })
+        });
     }
 
     /**
