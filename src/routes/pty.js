@@ -9,7 +9,7 @@ const logs = {};
 
 /** @todo add authentication */
 const user = {
-    containerID: '7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c' // replace with own test id for testing
+    containerID: 'e8213a9fc41c836eb45987d40070393a70a567a8d7727322060460a19116833a' //'7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c' // replace with own test id for testing
 };
 
 router.post('/docker', (req, res) => {

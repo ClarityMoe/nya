@@ -22,4 +22,5 @@ PermitRootLogin no' > /etc/ssh/sshd_config && \
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen
 USER awau
+VOLUME /home/awau
 RUN cat /proc/version

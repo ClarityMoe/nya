@@ -29,4 +29,5 @@ RUN mkdir /var/run/sshd && \
     useradd -u 1000 -G users,sudo -d /home/awau --shell /bin/bash -m awau && \
     usermod -p "*" awau
 USER awau
+VOLUME /home/awau
 RUN echo "awoo~"
