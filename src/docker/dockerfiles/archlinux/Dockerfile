@@ -20,7 +20,6 @@ PermitRootLogin no' > /etc/ssh/sshd_config && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
-    localge-gen
+    locale-gen
 USER awau
-CMD ["/usr/sbin/sshd", "-p 22", "-D"]
 RUN cat /proc/version
