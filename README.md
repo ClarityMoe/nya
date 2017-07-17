@@ -1,8 +1,8 @@
 # Nya
 
-Nya is a Web IDE based on VSCode (or monaco-editor), IntelliJ and Eclpise Che
+Nya is a Web IDE based on VSCode (or monaco-editor), IntelliJ and Eclipse Che
 
-It's nothing special, it's jsut a fucked up IDE.
+It's nothing special, it's just a fucked up IDE.
 
 ## Contributing
 
