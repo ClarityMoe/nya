@@ -53,13 +53,21 @@ iframe {
     cursor: ew-resize;
 }
 
-#resize-terminal {
-    min-height: 5px;
-    cursor: ns-resize;
+.rg-bottom, .rg-top {
+    height: 15px;
+    background-color: rgb(37,37,38);
+    display: block;
+    position: absolute;
+    margin-bottom: 0;
+}
+
+.rg-bottom span, .rg-top span {
+    height: 5px;
+    width: 10px;
+    margin: 5px 0 0 -10px
 }
 
 #editor {
-    height: 100%;
     width: 100%;
 }
 

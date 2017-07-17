@@ -4,9 +4,11 @@
  * @author noud02
  */
 
-var app = angular.module('awauApp', ['ngMaterial', 'ngMdIcons']);
+var app = angular.module('awauApp', ['ngMaterial', 'ngMdIcons', 'angularResizable']);
 var ws = new WSConnection('test');
+var editorDiv = document.getElementById('editor');
 var editorFrame = document.getElementById('editor-frame');
+var editorResize = document.getElementById('resize-editor');
 var editorWindow = null;
 var editor = null;
 var monaco = null;
@@ -42,12 +44,8 @@ function _connectTerm(id) {
 }
 
 function _resizeTerm() {
-
-    var rows = document.querySelector('.xterm-rows').children;
-    var row = rows[rows.length - 1];
-
-    var x = Math.floor(terminal.offsetWidth / window.getComputedStyle(row).width / row.innerHTML.match(/<span.+>(.+)<\/span>/)[1].split(';').length); //FIXME: doesnt work, need a way to get font letter height and width
-    var y = Math.floor(terminal.offsetHeight / window.getComputedStyle(row).height);
+    var x = Math.floor(terminal.offsetWidth / 9.50);
+    var y = Math.floor(terminal.offsetHeight / 17.75);
     xterm.resize(x, y);
     fetch('/pty/docker/' + dockerContainer.Id + '/resize', { method: 'POST', body: { cols: x, rows: y } });
 }

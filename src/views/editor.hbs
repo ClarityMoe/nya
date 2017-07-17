@@ -92,9 +92,16 @@
         <md-toolbar id="resize-file-man"></md-toolbar>
 
         <div id="editor" layout="column" layout-align="end none">
-            <iframe id="editor-frame" src="/editor/iframe" flex></iframe>
-            <md-toolbar id="resize-terminal"></md-toolbar>
-            <div id="terminal" flex></div>
+            <div id="resize-editor" resizable r-directions="['bottom']" r-flex="true">
+                <section style="height:100%;width:100%" flex>
+                    <iframe id="editor-frame" src="/editor/iframe" style="height:100%;width:100%"></iframe>
+                </section>
+            </div>
+            <div flex>
+                <section style="height:100%;width:100%" flex>
+                    <div id="terminal" style="height:100%;width:100%"></div>
+                </section>
+            </div>
         </div>
     </div>
 
