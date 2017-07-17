@@ -7,6 +7,7 @@
 // override to native promise
 global.Promise = require('bluebird');
 
+const electron = require('electron');
 const favicon = require('serve-favicon');
 const express = require('express');
 const http = require('http');
