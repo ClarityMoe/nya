@@ -12,6 +12,13 @@ const user = {
     containerID: 'e8213a9fc41c836eb45987d40070393a70a567a8d7727322060460a19116833a' //'7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c' // replace with own test id for testing
 };
 
+router.post('/docker/:id/resize', (req, res) => {
+    if (terms.hasOwnProperty(req.params.id)) {
+        terms[req.params.id].resize(req.body.cols || 80, req.body.rows || 24);
+        res.json({ ok_hand: true }).status(200).end();
+    }
+});
+
 router.post('/docker', (req, res) => {
     const containers = docker.containers;
     let container = null;
@@ -26,7 +33,7 @@ router.post('/docker', (req, res) => {
 
     switch (container.State) {
     case 'exited': {
-        docker.start(container.Id).then((r) => res.json({ container: container, response: r }).status(200).end()).catch((err) => {
+        docker.start(container.Id).then((r) => docker.dirTree(container.Mounts[0].Name).then(fs => res.json({ container: container, response: r, fs: fs }).status(200).end())).catch((err) => {
             console.error(err);
             res.json({ error: err }).status(500).end();
         });
@@ -34,7 +41,8 @@ router.post('/docker', (req, res) => {
     }
 
     case 'running': {
-        res.json({ container: container }).status(200).end();
+        docker.dirTree(container.Mounts[0].Name).then(fs => res.json({ container: container, fs: fs }).status(200).end());
+        break;
     }
     
     default: {

@@ -1,4 +1,5 @@
-const { execSync, execFileSync, spawnSync } = require('child_process');
+const { execSync } = require('child_process');
+const dirTree = require('directory-tree');
 const Logger = require('../utils/logger.js');
 
 class Docker {
@@ -95,6 +96,13 @@ class Docker {
                 reject(e);
             }
         });
+    }
+
+    dirTree(id) {
+        return new Promise((resolve, reject) => {
+            if (!id) return reject(new Error('Container ID not specified'));
+            resolve(dirTree(`/var/lib/docker/volumes/${id}/_data/`));
+        })
     }
 
 }

@@ -12,6 +12,7 @@ var editor = null;
 var monaco = null;
 var dockerSock = null;
 var dockerContainer = {};
+var dockerHome = {};
 var fileman = document.getElementById('file-man');
 var terminal = document.getElementById('terminal');
 var xterm = new Terminal({
@@ -23,27 +24,32 @@ var xterm = new Terminal({
 
 xterm.open(terminal);
 
-window.addEventListener('DOMContentLoaded', function() {
-    xterm.resize(Math.floor(terminal.offsetWidth / 9.50), Math.floor(terminal.offsetHeight / 17.75));
+window.addEventListener('DOMContentLoaded', function () {
+    _resizeTerm();
 });
 
 function error(e) {
     /** @todo add notification */
     throw new Error(e);
-} 
+}
 
 function _connectTerm(id) {
     dockerSock = new WebSocket('ws://' + window.location.hostname + ':5000/pty/docker/' + id); // 7c0297ebd3a26b4ee54965a584585149bf7b76a717b9e03068c6d7f0faef1b0c
-    dockerSock.onopen = function() {
+    dockerSock.onopen = function () {
         xterm.attach(dockerSock);
         xterm._initialized = true;
     };
 }
 
 function _resizeTerm() {
-    var x = terminal.offsetWidth / 9.50;
-    var y = terminal.offsetHeight / 17.75;
+
+    var rows = document.querySelector('.xterm-rows').children;
+    var row = rows[rows.length - 1];
+
+    var x = Math.floor(terminal.offsetWidth / window.getComputedStyle(row).width / row.innerHTML.match(/<span.+>(.+)<\/span>/)[1].split(';').length); //FIXME: doesnt work, need a way to get font letter height and width
+    var y = Math.floor(terminal.offsetHeight / window.getComputedStyle(row).height);
     xterm.resize(x, y);
+    fetch('/pty/docker/' + dockerContainer.Id + '/resize', { method: 'POST', body: { cols: x, rows: y } });
 }
 
 function _initTerm() {
@@ -54,10 +60,12 @@ function _initTerm() {
         fetch('/pty/docker', { method: 'POST' }).then(function (res) {
             res.json().then(function (json) {
                 dockerContainer = json.container;
+                console.log(json)
+                dockerHome = json.fs;
                 _connectTerm(json.container.Id);
             });
         });
-        setInterval(function() {
+        setInterval(function () {
             if (!dockerContainer.Id) {
                 doRequest();
             } else if (!dockerSock || dockerSock.readyState === WebSocket.CLOSED) {
@@ -69,12 +77,12 @@ function _initTerm() {
         }, 5000);
     }
 
-    doRequest();    
+    doRequest();
 }
 
 _initTerm();
 
-window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function (e) {
     _resizeTerm();
 })
 
@@ -84,85 +92,73 @@ editorFrame.onload = function () {
     monaco = editorWindow.monaco;
 };
 
-ws.ws.addEventListener('msg', function (msg) {
-    switch (msg.t) {
-    case 'GET_FILE_RES': {
-            editor.setValue(msg.d.content);
-            break;
-        }
-    default: {
-            break;
-        }
-    }
-});
-
 app.controller('EditorCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $timeout) {
 
-    $scope.toggleProjects = function() {
+    $scope.toggleProjects = function () {
         $mdSidenav('project-nav').toggle();
-    }
+    };
 
-    $scope.toggleTasks = function() {
+    $scope.toggleTasks = function () {
         $mdSidenav('task-nav').toggle();
-    }
+    };
 
-    $scope.closeProjects = function() {
+    $scope.closeProjects = function () {
         $mdSidenav('project-nav').close();
-    }
+    };
 
-    $scope.closeTasks = function() {
+    $scope.closeTasks = function () {
         $mdSidenav('task-nav').close();
-    }
+    };
 });
 
+angular.module('resizer', []).directive('resizer', function ($document) {
 
+    return function ($scope, $element, $attrs) {
 
-app.directive('resize', function ($document) {
-    return function ($scope, $element, $attr) {
-        $element.addEventListener('mousedown', function (event) {
+        $element.on('mousedown', function (event) {
             event.preventDefault();
 
-            $document.addEventListener('mousemove', mousemove);
-            $document.addEventListener('mouseup', mouseup);
+            $document.on('mousemove', mousemove);
+            $document.on('mouseup', mouseup);
         });
 
         function mousemove(event) {
-            if ($attr['resize'] === 'vertical') {
+
+            if ($attrs.resizer == 'vertical') {
+                // Handle vertical resizer
                 var x = event.pageX;
 
-                if ($attr['max-resize'] && x > $attr['max-resize']) {
-                    x = parseInt($attr['max-resize']);
+                if ($attrs.resizerMax && x > $attrs.resizerMax) {
+                    x = parseInt($attrs.resizerMax);
                 }
 
-                $element.style.left = x + 'px';
+                if ($attrs.resizerMax && x < $attrs.resizerMin) {
+                    x = parseInt($attrs.resizerMin);
+                }
 
-                document.querySelectorAll($attr['left-resize']).forEach(function (el) {
-                    el.style.width = x + 'px';
+                $element.css({
+                    left: x + 'px'
                 });
 
-                document.querySelectorAll($attr['right-resize']).forEach(function (el) {
-                    el.style.left = (x + parseInt($attr['resize-width'])) + 'px';
-                });
-
+                document.getElementById($attrs.resizerLeft.substring(1)).style.width = x + 'px'
+                document.getElementById($attrs.resizerRight.substring(1)).style.left = (x + parseInt($attrs.resizerWidth)) + 'px'
 
             } else {
+                // Handle horizontal resizer
                 var y = window.innerHeight - event.pageY;
 
-                $element.style.bottom = y + 'px';
-
-                document.querySelectorAll($attr['top-resize']).forEach(function (el) {
-                    el.style.bottom = (y + parseInt($attr['resize-height'])) + 'px';
+                $element.css({
+                    bottom: y + 'px'
                 });
 
-                document.querySelectorAll($attr['bottom-resize']).forEach(function (el) {
-                    el.style.height = y + 'px';
-                });
+                document.getElementById($attrs.resizerTop.substring(1)).style.bottom = y + 'px'
+                document.getElementById($attrs.resizerBottom.substring(1)).style.height = (y + parseInt($attrs.resizerHeight)) + 'px'
             }
         }
 
         function mouseup() {
-            $document.removeEventListener('mousemove', mousemove);
-            $document.removeEventListener('mouseup'.mouseup);
+            $document.unbind('mousemove', mousemove);
+            $document.unbind('mouseup', mouseup);
         }
     };
 });

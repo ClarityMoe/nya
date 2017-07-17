@@ -5,24 +5,37 @@
         <div layout="row">
             <md-menu-bar>
                 <md-menu class="editor-buttons">
-                    <md-button>
-                        <span md-menu-origin>File</span>
+                    <md-button ng-click="$mdMenu.open()">
+                        File
                     </md-button>
                     <md-menu-content width="4">
                         <md-menu-item>
                             <md-button>
-                                <i class="material-icons">save</i>
                                 Save
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button>
+                                Open
                             </md-button>
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>
                 <md-menu class="editor-buttons">
-                    <md-button>
+                    <md-button ng-click="$mdMenu.open()">
                         Edit
                     </md-button>
                     <md-menu-content>
-
+                        <md-menu-item>
+                            <md-button>
+                                Undo
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button>
+                                Redo
+                            </md-button>
+                        </md-menu-item>
                     </md-menu-content>
                 </md-menu>
             </md-menu-bar>
@@ -69,8 +82,9 @@
         <md-toolbar class="md-hue-2" id="file-man">
 
             <div layout="column" layout-align="start start">
-                <md-menu-bar>
-                </md-menu-bar>
+                <div>
+                    <!-- Project files and folders go here -->
+                </div>
             </div>
 
         </md-toolbar>

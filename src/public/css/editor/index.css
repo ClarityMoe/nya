@@ -12,12 +12,12 @@ iframe {
 
 ::-webkit-scrollbar {
     background: transparent;
-    border: 1px solid hsla(0,0%,47%,.4);
+    border: 1px solid hsla(0, 0%, 47%, .4);
     width: 14px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: hsla(0,0%,47%,.4);
+    background: hsla(0, 0%, 47%, .4);
     transition: opacity .1s linear;
 }
 
@@ -25,12 +25,15 @@ iframe {
     box-sizing: border-box;
 }
 
-.editor-buttons .md-button span {
-    font-size: 12px
+.editor-buttons .md-button {
+    font-size: 12px;
+    height: 36px;
+    margin: 0;
 }
 
 #top-toolbar {
     min-height: 36px;
+    height: 36px;
 }
 
 #projects {
@@ -67,7 +70,12 @@ iframe {
 
 #bottom-toolbar {
     min-height: 25px;
+    height: 40px;
     background-color: rgb(30, 30, 31)
+}
+
+#bottom-toolbar button {
+    margin: 0
 }
 
 #bottom-toolbar i {
@@ -80,7 +88,7 @@ iframe {
 }
 
 #side-toolbar {
-    width:20px;
+    width: 20px;
     background-color: rgb(30, 30, 31);
 }
 
@@ -94,4 +102,19 @@ iframe {
 
 .terminal {
     height: 100%;
+}
+
+#file-man * {
+    font-size: 15px;
+}
+
+#editor-frame {
+    z-index: 10;
+}
+
+md-menu-bar.md-default-theme md-menu.md-open>button,
+md-menu-bar md-menu.md-open>button,
+md-menu-bar.md-default-theme md-menu>button:focus,
+md-menu-bar md-menu>button:focus {
+    background-color: inherit
 }
