@@ -1,4 +1,8 @@
 {
   "name": "awau-ide",
-  "dependencies": {}
+  "dependencies": {
+    "electron": "/node_modules/electron/electron.d.ts",
+    "express": "registry:npm/express#4.14.0+20170217205433",
+    "monaco-editor": "/node_modules/monaco-editor/monaco.d.ts"
+  }
 }
