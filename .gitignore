@@ -60,5 +60,3 @@ typings/
 # things we dont need
 html/
 
-# Typings folder
-typings
