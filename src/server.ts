@@ -4,5 +4,10 @@
  */
 
  import * as express from 'express';
- import * as child_process from 'child_process';
+ import child_process = require('child_process');
  
+
+ /* start off by creating an express app */
+ const app = express();
+
+ app.set('port', 8080);

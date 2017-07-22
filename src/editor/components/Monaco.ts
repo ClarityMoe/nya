@@ -4,13 +4,8 @@
  * @author Capuccino
  */
 
-/// <reference path= "../../node_modules/monaco-editor/monaco.d.ts"/>
-
 import { Editor } from 'ui/Editor';
 import customElements from 'ui/CustomElements';
-
-import * as path from 'path';
-import * as fs from 'fs';
 
 export default class MonacoEditor extends Editor {
     static tag = 'monaco-editor';

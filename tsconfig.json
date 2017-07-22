@@ -1,0 +1,15 @@
+{
+    "typeAcquisition": {
+        "include": [
+            "node_modules/*"
+        ]
+    },
+    "compilerOptions": {
+        "allowJs": true,
+        "baseUrl": "./",
+        "rootDirs": [
+            "editor/ui",
+            "editor/components"
+        ]
+    }
+}
