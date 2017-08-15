@@ -7,3 +7,5 @@ It's nothing special, it's just a fucked up IDE.
 ## Contributing
 
 We accept contributions. That's all you need to know
+
+## Usage
